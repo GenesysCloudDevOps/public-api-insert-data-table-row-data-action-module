@@ -1,0 +1,64 @@
+{
+  "name": "Insert Data Table Row",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/flows/datatables/${input.DatatableId}/rows",
+      "requestType": "POST",
+      "headers": {},
+      "requestTemplate": "{\"key\": \"${input.key}\", \"ExampleField\": \"$!{input.ExampleField}}\"}"
+    },
+    "response": {
+      "translationMap": {},
+      "translationMapDefaults": {},
+      "successTemplate": "${rawResult}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "Row update",
+        "description": "A Row update",
+        "type": "object",
+        "required": [
+          "Key"
+        ],
+        "properties": {
+          "DatatableId": {
+            "description": "Data Table ID",
+            "type": "string"
+          },
+          "Key": {
+            "description": "Data Table Row Identifier",
+            "type": "string"
+          },
+          "ExampleField": {
+            "description": "Example string data table field",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "output": {
+      "successSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "Row update",
+        "description": "returns the new row",
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "ExampleField": {
+            "type": "string",
+            "title": "ExampleField"
+          }
+        }
+      }
+    }
+  },
+  "secure": false
+}
